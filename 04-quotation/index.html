@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sample Quotation</title>
+  <meta name="description" content="Company quotation">
+  <meta name="author" content="SitePoint">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5 CSS & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .quotation-header {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+    }
+    .table th {
+      background-color: #343a40;
+      color: white;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-weight: bold;
+      color: #6c757d;
+    }
+    .modal-content {
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+<div class="container my-5">
+  <div class="quotation-header row align-items-center">
+    <div class="col-md-4">
+      <h2>VMS HACKER</h2>
+      <address>
+        Bangsaothong<br>
+        Samutrprakarn, THAILAND 30000<br>
+        <i class="bi bi-telephone-fill"></i> 12345678<br>
+        <i class="bi bi-phone-fill"></i> 12345678
+      </address>
+    </div>
+    <div class="col-md-5"></div>
+    <div class="col-md-3 text-center">
+      <h1 class="text-primary">QUOTATION</h1>
+      <img src="https://admissions.au.edu/wp-content/uploads/2019/08/science.jpg"
+           class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <h5>Customer:</h5>
+      <p><strong>Sample customer name 001</strong><br>
+        Sample address line1<br>
+        Sample address line2<br>
+        Sample address line3</p>
+    </div>
+    <div class="col-md-4">
+      <h5>Ship to:</h5>
+      <p><strong>Sample customer name 001</strong><br>
+        Sample address line1<br>
+        Sample address line2<br>
+        Sample address line3</p>
+    </div>
+    <div class="col-md-4 text-md-end text-start">
+      <h6 class="text-muted">Date</h6>
+      <h5 id="quotationDate">2010/07/27</h5>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="bi bi-plus-circle me-1"></i> Add Item
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered text-center" id="quotationTable">
+      <thead>
+      <tr>
+        <th>Quantity</th>
+        <th>Description</th>
+        <th>Unit Price</th>
+        <th>Amount</th>
+      </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+      <tr>
+        <td colspan="3" class="text-end fw-bold">Subtotal</td>
+        <td class="text-end" id="subTotal">--</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="text-end fw-bold">VAT (7%)</td>
+        <td class="text-end" id="vat">--</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="text-end fw-bold">Shipping</td>
+        <td class="text-end" id="bottom-line">0.00</td>
+      </tr>
+      <tr class="table-primary">
+        <td colspan="3" class="text-end fw-bold">Total Due</td>
+        <td class="text-end fw-bold" id="total">--</td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <p class="text-center mt-4">
+    <b>Make all checks payable to:</b><br>
+    <i>Your company name here</i><br>
+    <b>If you have any question concerning this invoice, call:</b><br>
+    <br>
+    <b>THANK YOU FOR YOUR BUSINESS</b>
+  </p>
+
+  <footer>SWANYI.CO.LTD</footer>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Add Quotation Item</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addItemForm">
+          <div class="mb-3">
+            <label for="newItemDescription" class="form-label">Description</label>
+            <input type="text" class="form-control" id="newItemDescription" required>
+          </div>
+          <div class="mb-3">
+            <label for="newItemPPU" class="form-label">Price Per Unit</label>
+            <input type="number" class="form-control" id="newItemPPU" min="0" required>
+          </div>
+          <div class="mb-3">
+            <label for="newItemQty" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="newItemQty" min="1" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" onclick="addItem()">Save Item</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  var quotationData = [];
+
+  function addItem() {
+    const desc = $("#newItemDescription").val().trim();
+    const unitPrice = parseFloat($("#newItemPPU").val());
+    const quantity = parseInt($("#newItemQty").val());
+
+    if (desc && !isNaN(unitPrice) && !isNaN(quantity)) {
+      quotationData.push({ description: desc, quantity, unitPrice });
+      $('#exampleModal').modal('hide');
+      $('#addItemForm')[0].reset();
+      renderTable();
+    }
+  }
+
+  function renderTable() {
+    const tbody = $("#quotationTable tbody");
+    tbody.empty();
+
+    let subTotal = 0;
+
+    quotationData.forEach((item, i) => {
+      const amount = item.quantity * item.unitPrice;
+      subTotal += amount;
+      const row = `
+        <tr class="data-row">
+          <td>${item.quantity}</td>
+          <td>
+            ${item.description} 
+            <button class="btn btn-sm btn-outline-danger float-end" onclick="deleteItem(${i})">
+              <i class="bi bi-x-circle"></i>
+            </button>
+          </td>
+          <td>${item.unitPrice.toFixed(2)}</td>
+          <td>${amount.toFixed(2)}</td>
+        </tr>`;
+      tbody.append(row);
+    });
+
+    const vat = (subTotal * 0.07).toFixed(2);
+    const total = (subTotal * 1.07).toFixed(2);
+
+    $("#subTotal").text(subTotal.toFixed(2));
+    $("#vat").text(vat);
+    $("#total").text(total);
+  }
+
+  function deleteItem(index) {
+    quotationData.splice(index, 1);
+    renderTable();
+  }
+
+  $(document).ready(function () {
+    const d = new Date();
+    $("#quotationDate").text(d.toDateString());
+  });
+</script>
+</body>
+</html>
